@@ -133,8 +133,8 @@
         "qos": "0",
         "retain": "false",
         "broker": "79250bf3.365cc4",
-        "x": 1210,
-        "y": 180,
+        "x": 1090,
+        "y": 940,
         "wires": []
     },
     {
@@ -192,15 +192,12 @@
         "type": "function",
         "z": "5f562f66.a301e",
         "name": "createSettings",
-        "func": "function getAttrObject(device, propName, attrName)\n{\n    var props = device[propName];\n    var attr = props.find(attr => attr.attr === attrName);\n    return attr;\n}\n\nvar device = msg.payload;\nfor (var ii = 0; ii < device.settings.length; ++ii)\n{\n    if (device.settings[ii].type == 'scalar')\n    {\n        device.settings[ii].alarm.value = 0;\n        if (!isNaN(device.settings[ii].value))\n        {\n            if (device.settings[ii].value < device.settings[ii].alarm.limits.low)  device.settings[ii].alarm.value = 1;\n            if (device.settings[ii].value < device.settings[ii].alarm.limits.lolo) device.settings[ii].alarm.value = 3;\n            if (device.settings[ii].value > device.settings[ii].alarm.limits.high) device.settings[ii].alarm.value = 2;\n            if (device.settings[ii].value > device.settings[ii].alarm.limits.hihi) device.settings[ii].alarm.value = 4;\n        }\n    }\n}\nflow.set('device', msg.payload);    \n\nvar motorDirection = {topic:'motor-direction', payload:getAttrObject(device, 'settings', 'motor-direction').value};\nvar motorOn = {topic:'motor-on', payload:getAttrObject(device, 'settings', 'motor-on').value};\nvar motorSpeed = {topic:'motor-speed', payload:getAttrObject(device, 'settings', 'motor-speed').value};\n\nreturn [{topic:'settings',payload:device}, motorDirection, motorOn, motorSpeed];",
-        "outputs": 4,
+        "func": "function getAttrObject(device, propName, attrName)\n{\n    var props = device[propName];\n    var attr = props.find(attr => attr.attr === attrName);\n    return attr;\n}\n\nvar device = msg.payload;\nfor (var ii = 0; ii < device.settings.length; ++ii)\n{\n    if (device.settings[ii].type == 'scalar')\n    {\n        device.settings[ii].alarm.value = 0;\n        if (!isNaN(device.settings[ii].value))\n        {\n            if (device.settings[ii].value < device.settings[ii].alarm.limits.low)  device.settings[ii].alarm.value = 1;\n            if (device.settings[ii].value < device.settings[ii].alarm.limits.lolo) device.settings[ii].alarm.value = 3;\n            if (device.settings[ii].value > device.settings[ii].alarm.limits.high) device.settings[ii].alarm.value = 2;\n            if (device.settings[ii].value > device.settings[ii].alarm.limits.hihi) device.settings[ii].alarm.value = 4;\n        }\n    }\n}\nflow.set('device', msg.payload);    \n\nvar motorDirection = {topic:'motor-direction', payload:getAttrObject(device, 'settings', 'motor-direction').value};\nvar motorOn = {topic:'motor-on', payload:getAttrObject(device, 'settings', 'motor-on').value};\nvar motorSpeed = {topic:'motor-speed', payload:getAttrObject(device, 'settings', 'motor-speed').value};\n\nreturn [motorDirection, motorOn, motorSpeed];",
+        "outputs": 3,
         "noerr": 0,
         "x": 960,
-        "y": 280,
+        "y": 300,
         "wires": [
-            [
-                "e43dd4a7.e52c58"
-            ],
             [
                 "eabedbe6.f7de18"
             ],
@@ -293,8 +290,8 @@
         "timer": "",
         "oldrc": false,
         "name": "",
-        "x": 800,
-        "y": 140,
+        "x": 840,
+        "y": 1160,
         "wires": [
             [
                 "afd71a05.ebd4e8"
@@ -315,8 +312,8 @@
         "crontab": "",
         "once": true,
         "onceDelay": 0.1,
-        "x": 790,
-        "y": 80,
+        "x": 670,
+        "y": 1160,
         "wires": [
             [
                 "f69c600b.9542"
@@ -331,12 +328,10 @@
         "func": "var info = msg.payload;\nvar linkStartIndex  = info.indexOf('Link Quality=');\nvar levelStartIndex = info.indexOf('Signal level=');\nvar linkStopIndex   = info.indexOf('/70');\nvar levelStopIndex   = info.lastIndexOf('dBm');\nvar linkQuality = Number(info.substring(linkStartIndex + 13, linkStopIndex));\nvar signalLevel =  Number(info.substring(levelStartIndex + 13, levelStopIndex - 1));\nvar ssid = info.substring(info.indexOf('ESSID') + 7);\nssid = ssid.substring(0,ssid.indexOf('\"'));\nvar val = {linkQuality : linkQuality, signalLevel: signalLevel, ssid:ssid};\nflow.set('linkQuality',linkQuality);\nflow.set('signalLevel', signalLevel);\nflow.set('ssid', ssid);\nreturn {topic :'test',payload : val};",
         "outputs": 1,
         "noerr": 0,
-        "x": 990,
-        "y": 120,
+        "x": 1070,
+        "y": 1160,
         "wires": [
-            [
-                "e43dd4a7.e52c58"
-            ]
+            []
         ]
     },
     {
@@ -435,8 +430,7 @@
                 "e6e2820f.254d4"
             ],
             [
-                "dd557b4c.c15d08",
-                "16f7f2b4.10005d"
+                "dd557b4c.c15d08"
             ]
         ]
     },
@@ -480,20 +474,6 @@
         "out": "out",
         "x": 1290,
         "y": 520,
-        "wires": []
-    },
-    {
-        "id": "16f7f2b4.10005d",
-        "type": "rpi-gpio out",
-        "z": "5f562f66.a301e",
-        "name": "Blue Led",
-        "pin": "13",
-        "set": true,
-        "level": "0",
-        "freq": "",
-        "out": "out",
-        "x": 1300,
-        "y": 580,
         "wires": []
     },
     {
@@ -585,15 +565,52 @@
         "type": "function",
         "z": "5f562f66.a301e",
         "name": "Check Reading Alarms",
-        "func": "function getAttrObject(device, propName, attrName)\n{\n    var props = device[propName];\n    var attr = props.find(attr => attr.attr === attrName);\n    return attr;\n}\n\nvar device = flow.get('device');\nvar linkQuality = getAttrObject(device, 'readings', 'linkQuality');\nvar signalLevel = getAttrObject(device, 'readings', 'signalLevel');\nlinkQuality.value = flow.get('linkQuality');\nsignalLevel.value = flow.get('signalLevel');\nfor (var ii = 0; ii < device.readings.length; ++ii)\n{\n    if (device.readings[ii].type == 'scalar')\n    {\n        device.readings[ii].alarm.value = 0;\n        if (!isNaN(device.readings[ii].value))\n        {\n            if (device.readings[ii].value < device.readings[ii].alarm.limits.low)  device.readings[ii].alarm.value = 1;\n            if (device.readings[ii].value < device.readings[ii].alarm.limits.lolo) device.readings[ii].alarm.value = 3;\n            if (device.readings[ii].value > device.readings[ii].alarm.limits.high) device.readings[ii].alarm.value = 2;\n            if (device.readings[ii].value > device.readings[ii].alarm.limits.hihi) device.readings[ii].alarm.value = 4;\n        }\n    }\n}\nreturn {topic:'readings',payload:device};",
-        "outputs": 1,
+        "func": "function getAttrObject(device, propName, attrName)\n{\n    var props = device[propName];\n    var attr = props.find(attr => attr.attr === attrName);\n    return attr;\n}\n\nvar blueLed = context.get('blueLed');\nif (blueLed == undefined) blueLed = 1;\n++blueLed;\nif (blueLed > 1) blueLed = 0;\ncontext.set('blueLed',blueLed);\n\nvar device = flow.get('device');\nvar linkQuality = getAttrObject(device, 'readings', 'linkQuality');\nvar signalLevel = getAttrObject(device, 'readings', 'signalLevel');\nlinkQuality.value = flow.get('linkQuality');\nsignalLevel.value = flow.get('signalLevel');\nfor (var ii = 0; ii < device.readings.length; ++ii)\n{\n    if (device.readings[ii].type == 'scalar')\n    {\n        device.readings[ii].alarm.value = 0;\n        if (!isNaN(device.readings[ii].value))\n        {\n            if (device.readings[ii].value < device.readings[ii].alarm.limits.low)  device.readings[ii].alarm.value = 1;\n            if (device.readings[ii].value < device.readings[ii].alarm.limits.lolo) device.readings[ii].alarm.value = 3;\n            if (device.readings[ii].value > device.readings[ii].alarm.limits.high) device.readings[ii].alarm.value = 2;\n            if (device.readings[ii].value > device.readings[ii].alarm.limits.hihi) device.readings[ii].alarm.value = 4;\n        }\n    }\n}\nreturn [{topic:'readings',payload:device},{topic:'blueLed',payload:blueLed}];",
+        "outputs": 2,
         "noerr": 0,
-        "x": 1200,
-        "y": 120,
+        "x": 880,
+        "y": 980,
         "wires": [
             [
                 "93049b70.2dc5c8"
+            ],
+            [
+                "c697455f.a95bb8"
             ]
         ]
+    },
+    {
+        "id": "ecd456c.ce08ba8",
+        "type": "inject",
+        "z": "5f562f66.a301e",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "1",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "5",
+        "x": 690,
+        "y": 980,
+        "wires": [
+            [
+                "e43dd4a7.e52c58"
+            ]
+        ]
+    },
+    {
+        "id": "c697455f.a95bb8",
+        "type": "rpi-gpio out",
+        "z": "5f562f66.a301e",
+        "name": "Blue Led",
+        "pin": "13",
+        "set": true,
+        "level": "0",
+        "freq": "",
+        "out": "out",
+        "x": 1060,
+        "y": 1020,
+        "wires": []
     }
 ]
