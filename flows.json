@@ -133,8 +133,8 @@
         "qos": "0",
         "retain": "false",
         "broker": "79250bf3.365cc4",
-        "x": 1090,
-        "y": 940,
+        "x": 530,
+        "y": 280,
         "wires": []
     },
     {
@@ -167,7 +167,8 @@
         "wires": [
             [
                 "f3f3f15.081c31",
-                "5902d0c0.241a6"
+                "c51d907.3c8c67",
+                "b392fad3.5b9dc8"
             ]
         ]
     },
@@ -196,7 +197,7 @@
         "outputs": 3,
         "noerr": 0,
         "x": 960,
-        "y": 300,
+        "y": 140,
         "wires": [
             [
                 "eabedbe6.f7de18"
@@ -220,9 +221,9 @@
         "repeat": "",
         "crontab": "",
         "once": true,
-        "onceDelay": 0.1,
+        "onceDelay": "5",
         "x": 140,
-        "y": 300,
+        "y": 140,
         "wires": [
             [
                 "163af492.5e952b"
@@ -240,7 +241,7 @@
         "sendError": false,
         "encoding": "none",
         "x": 360,
-        "y": 300,
+        "y": 140,
         "wires": [
             [
                 "53c95857.5f3d68"
@@ -256,7 +257,7 @@
         "action": "",
         "pretty": false,
         "x": 530,
-        "y": 300,
+        "y": 140,
         "wires": [
             [
                 "30f384ea.cf21fc"
@@ -272,7 +273,7 @@
         "outputs": 1,
         "noerr": 0,
         "x": 720,
-        "y": 300,
+        "y": 140,
         "wires": [
             [
                 "f3f3f15.081c31"
@@ -290,8 +291,8 @@
         "timer": "",
         "oldrc": false,
         "name": "",
-        "x": 840,
-        "y": 1160,
+        "x": 320,
+        "y": 480,
         "wires": [
             [
                 "afd71a05.ebd4e8"
@@ -312,8 +313,8 @@
         "crontab": "",
         "once": true,
         "onceDelay": 0.1,
-        "x": 670,
-        "y": 1160,
+        "x": 150,
+        "y": 480,
         "wires": [
             [
                 "f69c600b.9542"
@@ -328,8 +329,8 @@
         "func": "var info = msg.payload;\nvar linkStartIndex  = info.indexOf('Link Quality=');\nvar levelStartIndex = info.indexOf('Signal level=');\nvar linkStopIndex   = info.indexOf('/70');\nvar levelStopIndex   = info.lastIndexOf('dBm');\nvar linkQuality = Number(info.substring(linkStartIndex + 13, linkStopIndex));\nvar signalLevel =  Number(info.substring(levelStartIndex + 13, levelStopIndex - 1));\nvar ssid = info.substring(info.indexOf('ESSID') + 7);\nssid = ssid.substring(0,ssid.indexOf('\"'));\nvar val = {linkQuality : linkQuality, signalLevel: signalLevel, ssid:ssid};\nflow.set('linkQuality',linkQuality);\nflow.set('signalLevel', signalLevel);\nflow.set('ssid', ssid);\nreturn {topic :'test',payload : val};",
         "outputs": 1,
         "noerr": 0,
-        "x": 1070,
-        "y": 1160,
+        "x": 550,
+        "y": 480,
         "wires": [
             []
         ]
@@ -346,8 +347,8 @@
         "crontab": "",
         "once": true,
         "onceDelay": 0.1,
-        "x": 830,
-        "y": 480,
+        "x": 810,
+        "y": 300,
         "wires": [
             [
                 "eabedbe6.f7de18"
@@ -366,8 +367,8 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "x": 830,
-        "y": 740,
+        "x": 810,
+        "y": 480,
         "wires": [
             [
                 "7389666.b488398"
@@ -386,8 +387,8 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "x": 830,
-        "y": 420,
+        "x": 810,
+        "y": 240,
         "wires": [
             [
                 "eabedbe6.f7de18"
@@ -406,8 +407,8 @@
         "crontab": "",
         "once": true,
         "onceDelay": 0.1,
-        "x": 830,
-        "y": 660,
+        "x": 810,
+        "y": 400,
         "wires": [
             [
                 "7389666.b488398"
@@ -422,8 +423,8 @@
         "func": "var ain1 = {topic:'ain1',payload:1};\nvar ain2 = {topic:'ain1',payload:0};\nif (msg.payload == 0)\n{\n    ain1.payload = 0;\n    ain2.payload = 1;\n}\nreturn [ain1,ain2];",
         "outputs": 2,
         "noerr": 0,
-        "x": 1050,
-        "y": 480,
+        "x": 1030,
+        "y": 300,
         "wires": [
             [
                 "bd75cd57.24b0c",
@@ -444,8 +445,8 @@
         "level": "0",
         "freq": "",
         "out": "out",
-        "x": 1290,
-        "y": 400,
+        "x": 1270,
+        "y": 220,
         "wires": []
     },
     {
@@ -458,8 +459,8 @@
         "level": "0",
         "freq": "",
         "out": "out",
-        "x": 1310,
-        "y": 460,
+        "x": 1290,
+        "y": 280,
         "wires": []
     },
     {
@@ -472,8 +473,8 @@
         "level": "0",
         "freq": "",
         "out": "out",
-        "x": 1290,
-        "y": 520,
+        "x": 1270,
+        "y": 340,
         "wires": []
     },
     {
@@ -484,8 +485,8 @@
         "func": "var motorOn = {topic:'motorOn',payload:0}\nif (msg.payload == 1)\n{\n    motorOn.payload = 1\n}\nreturn motorOn;",
         "outputs": 1,
         "noerr": 0,
-        "x": 1020,
-        "y": 700,
+        "x": 1000,
+        "y": 440,
         "wires": [
             [
                 "965df8fc.79ce58",
@@ -503,8 +504,8 @@
         "level": "0",
         "freq": "",
         "out": "out",
-        "x": 1300,
-        "y": 680,
+        "x": 1280,
+        "y": 420,
         "wires": []
     },
     {
@@ -517,8 +518,8 @@
         "level": "0",
         "freq": "",
         "out": "out",
-        "x": 1300,
-        "y": 740,
+        "x": 1280,
+        "y": 480,
         "wires": []
     },
     {
@@ -532,8 +533,8 @@
         "timer": "",
         "oldrc": false,
         "name": "Change Motor Speed",
-        "x": 1100,
-        "y": 860,
+        "x": 1080,
+        "y": 560,
         "wires": [
             [],
             [],
@@ -552,8 +553,8 @@
         "crontab": "",
         "once": true,
         "onceDelay": "1",
-        "x": 840,
-        "y": 860,
+        "x": 820,
+        "y": 560,
         "wires": [
             [
                 "9390816c.be9d3"
@@ -568,8 +569,8 @@
         "func": "function getAttrObject(device, propName, attrName)\n{\n    var props = device[propName];\n    var attr = props.find(attr => attr.attr === attrName);\n    return attr;\n}\n\nvar blueLed = context.get('blueLed');\nif (blueLed == undefined) blueLed = 1;\n++blueLed;\nif (blueLed > 1) blueLed = 0;\ncontext.set('blueLed',blueLed);\n\nvar device = flow.get('device');\nvar linkQuality = getAttrObject(device, 'readings', 'linkQuality');\nvar signalLevel = getAttrObject(device, 'readings', 'signalLevel');\nlinkQuality.value = flow.get('linkQuality');\nsignalLevel.value = flow.get('signalLevel');\nfor (var ii = 0; ii < device.readings.length; ++ii)\n{\n    if (device.readings[ii].type == 'scalar')\n    {\n        device.readings[ii].alarm.value = 0;\n        if (!isNaN(device.readings[ii].value))\n        {\n            if (device.readings[ii].value < device.readings[ii].alarm.limits.low)  device.readings[ii].alarm.value = 1;\n            if (device.readings[ii].value < device.readings[ii].alarm.limits.lolo) device.readings[ii].alarm.value = 3;\n            if (device.readings[ii].value > device.readings[ii].alarm.limits.high) device.readings[ii].alarm.value = 2;\n            if (device.readings[ii].value > device.readings[ii].alarm.limits.hihi) device.readings[ii].alarm.value = 4;\n        }\n    }\n}\nreturn [{topic:'readings',payload:device},{topic:'blueLed',payload:blueLed}];",
         "outputs": 2,
         "noerr": 0,
-        "x": 880,
-        "y": 980,
+        "x": 320,
+        "y": 320,
         "wires": [
             [
                 "93049b70.2dc5c8"
@@ -591,8 +592,8 @@
         "crontab": "",
         "once": true,
         "onceDelay": "5",
-        "x": 690,
-        "y": 980,
+        "x": 130,
+        "y": 320,
         "wires": [
             [
                 "e43dd4a7.e52c58"
@@ -609,8 +610,77 @@
         "level": "0",
         "freq": "",
         "out": "out",
-        "x": 1060,
-        "y": 1020,
+        "x": 500,
+        "y": 360,
         "wires": []
+    },
+    {
+        "id": "c51d907.3c8c67",
+        "type": "function",
+        "z": "5f562f66.a301e",
+        "name": "Make Pretty",
+        "func": "var jsonPretty = JSON.stringify(msg.payload,null,2);\nreturn {topic: msg.payload, payload:jsonPretty};",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 770,
+        "y": 40,
+        "wires": [
+            [
+                "5902d0c0.241a6"
+            ]
+        ]
+    },
+    {
+        "id": "b392fad3.5b9dc8",
+        "type": "debug",
+        "z": "5f562f66.a301e",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 400,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "7b30dced.c077d4",
+        "type": "inject",
+        "z": "5f562f66.a301e",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "x": 130,
+        "y": 700,
+        "wires": [
+            [
+                "93e99f2.13f356"
+            ]
+        ]
+    },
+    {
+        "id": "93e99f2.13f356",
+        "type": "exec",
+        "z": "5f562f66.a301e",
+        "command": "gpio mode 26 pwm",
+        "addpay": false,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "oldrc": false,
+        "name": "",
+        "x": 310,
+        "y": 700,
+        "wires": [
+            [],
+            [],
+            []
+        ]
     }
 ]
