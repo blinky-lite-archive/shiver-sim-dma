@@ -1,0 +1,107 @@
+{
+  "name": "001",
+  "deviceType": "shiverSim",
+  "arcPeriod": 60000,
+  "timeStamp": 0,
+  "lastArchive": 0,
+  "linkQuality": {
+    "action": "reading",
+    "type": "scalar",
+    "value": 60,
+    "unit": "/70",
+    "alarm": {
+      "value": 0,
+      "limits": {
+        "lolo": 30,
+        "low": 40,
+        "high": 71,
+        "hihi": 80
+      },
+      "notify": {
+        "name": "",
+        "number": "",
+        "time": 0
+      }
+    }
+  },
+  "signalLevel": {
+    "action": "reading",
+    "type": "scalar",
+    "value": -50,
+    "unit": "dBm",
+    "alarm": {
+      "value": 0,
+      "limits": {
+        "lolo": -70,
+        "low": -60,
+        "high": 0,
+        "hihi": 30
+      },
+      "notify": {
+        "name": "",
+        "number": "",
+        "time": 0
+      }
+    }
+  },
+  "motor-direction": {
+    "action": "reading",
+    "type": "scalar",
+    "value": 1,
+    "unit": "unit",
+    "alarm": {
+      "value": 0,
+      "limits": {
+        "lolo": -1,
+        "low": -1,
+        "high": 2,
+        "hihi": 2
+      },
+      "notify": {
+        "name": "",
+        "number": "",
+        "time": 0
+      }
+    }
+  },
+  "motor-on": {
+    "action": "reading",
+    "type": "scalar",
+    "value": 0,
+    "unit": "unit",
+    "alarm": {
+      "value": 0,
+      "limits": {
+        "lolo": -1,
+        "low": -1,
+        "high": 2,
+        "hihi": 2
+      },
+      "notify": {
+        "name": "",
+        "number": "",
+        "time": 0
+      }
+    }
+  },
+  "motor-speed": {
+    "action": "reading",
+    "type": "scalar",
+    "value": 218,
+    "unit": "unit",
+    "alarm": {
+      "value": 0,
+      "limits": {
+        "lolo": 99,
+        "low": 99,
+        "high": 221,
+        "hihi": 222
+      },
+      "notify": {
+        "name": "",
+        "number": "",
+        "time": 0
+      }
+    }
+  }
+}
